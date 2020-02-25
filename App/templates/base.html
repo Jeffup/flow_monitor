@@ -1,0 +1,58 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock %}
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet"  href="{{ url_for('static',filename='body.css') }}">
+{% endblock %}
+
+{% block title %}Monitoring{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <p>TrafficMonitor</p>
+      </a>
+    </div>
+{#      <div class="navbar-right btn-group btn-group-lg" role="group" aria-label="..."><button class="glyphicon glyphicon-cog"></button></div>#}
+       <div class="navbar-right">
+           <a href="#"  data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-cog "></span></a>
+       </div>
+  </div>
+</nav>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					设置
+				</h4>
+			</div>
+			<div class="modal-body">
+                {{ wtf.quick_form(form) }}
+			</div>
+{#			<div class="modal-footer">#}
+{#				<button type="button" class="btn btn-default" data-dismiss="modal">关闭#}
+{#				</button>#}
+{#				<button type="button" class="btn btn-primary" >#}
+{#					提交更改#}
+{#				</button>#}
+{#			</div>#}
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

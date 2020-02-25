@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+
+
+{% block styles %}
+    {{ super() }}
+<!-- boootstrap-table -->
+   <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/bootstrap-table.min.css">
+{#<link rel="stylesheet" href="css/bootstrap-table.min.css">#}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <!-- boootstrap-table -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/bootstrap-table.min.js"></script>
+
+<!-- Latest compiled and minified Locales -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='table.js') }}"></script>
+<script src="{{ url_for('static',filename='socketio.js') }}"></script>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="row">
+    <!-- the first graph-->
+        <div class="col-lg-3">
+
+           <div class="col-lg-12">
+             <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">系统状态</h3>
+                </div>
+                <div class="panel-body">
+                    CPU%:
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="div_cpu">
+                      </div>
+                    </div>
+                    内存:
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="div_mem">
+                      </div>
+                    </div>
+                    磁盘:
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="div_disk">
+                      </div>
+                    </div>
+                    网络:
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4"><span class="glyphicon glyphicon-circle-arrow-up"></span> </div>
+                            <div class="col-lg-8 well well-sm" id="div_net_up"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4"><span class="glyphicon glyphicon-circle-arrow-down"></span> </div>
+                            <div class="col-lg-8 well well-sm" id="div_net_down"></div>
+                        </div>
+                    </div>
+
+                </div>
+             </div>
+           </div>
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">系统提示<span class="badge" id="span_notify_num">0</span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table_notify_text">
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+<!-- the second graph-->
+        <div class="col-lg-6">
+            <div class="col-lg-12">
+                <table id="capture_table">
+                </table>
+           </div>
+
+{#            <div class="col-lg-12">#}
+{#                <div class="panel panel-default">#}
+{#                    <div class="panel-heading">#}
+{#                        <h3 class="panel-title">收包状态</h3>#}
+{#                    </div>#}
+{#                    <div class="panel-body">#}
+{#                        test#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+        </div>
+
+        <!-- the third graph-->
+        <div class="col-lg-3">
+            <div class="col-lg-12">
+             <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">威胁流量统计</h3>
+                </div>
+                <div class="panel-body">
+                    <table id="statistic_table">
+                    </table>
+                </div>
+             </div>
+           </div>
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">功能</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6"><button type="button" id = 'startproject' class="btn btn-primary">Start!</button></div>
+                            <div class="col-lg-6"><button type="button" id = 'stopproject' class="btn btn-danger">Stop!</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
